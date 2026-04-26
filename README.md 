@@ -6,21 +6,52 @@ A minimal implementation of a neural network with one hidden layer, designed to 
 
 The neural network has the following structure:
 
-```
-Input Layer (2 neurons)    Hidden Layer (4 neurons)    Output Layer (1 neuron)
-       x1 ------------------- h1 -------------------------- y
-                             h2 --------------------------
-                             h3 --------------------------
-                             h4 --------------------------
-       x2 -------------------
+```mermaid
+graph LR
+    A[Input Layer] --> B[Hidden Layer] --> C[Output Layer]
+
+    subgraph Input_Layer
+        I1[x1]
+        I2[x2]
+    end
+
+    subgraph Hidden_Layer
+        H1[h1]
+        H2[h2]
+        H3[h3]
+        H4[h4]
+    end
+
+    subgraph Output_Layer
+        O[y]
+    end
+
+    I1 --> H1
+    I1 --> H2
+    I1 --> H3
+    I1 --> H4
+    I2 --> H1
+    I2 --> H2
+    I2 --> H3
+    I2 --> H4
+
+    H1 --> O
+    H2 --> O
+    H3 --> O
+    H4 --> O
 ```
 
 ### Network Details
 
+| Layer | Neurons | Activation |
+|-------|---------|------------|
+| Input | 2 | None |
+| Hidden | 4 | Sigmoid |
+| Output | 1 | Sigmoid |
+
 - **Input Layer**: 2 neurons (for XOR inputs x1, x2)
 - **Hidden Layer**: 4 neurons with sigmoid activation
 - **Output Layer**: 1 neuron with sigmoid activation
-- **Activation Function**: Sigmoid
 - **Loss Function**: Mean Squared Error (MSE)
 - **Optimization**: Gradient Descent
 
