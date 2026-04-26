@@ -8,37 +8,35 @@ The neural network has the following structure:
 
 ```mermaid
 graph LR
-    A[Input Layer] --> B[Hidden Layer] --> C[Output Layer]
-
-    subgraph Input_Layer
-        I1[x1]
-        I2[x2]
+    subgraph Input ["Input Layer (2)"]
+        x1((x1))
+        x2((x2))
     end
 
-    subgraph Hidden_Layer
-        H1[h1]
-        H2[h2]
-        H3[h3]
-        H4[h4]
+    subgraph Hidden ["Hidden Layer (4)  --  Sigmoid"]
+        h1((h1))
+        h2((h2))
+        h3((h3))
+        h4((h4))
     end
 
-    subgraph Output_Layer
-        O[y]
+    subgraph Output ["Output Layer (1)  --  Sigmoid"]
+        y((y))
     end
 
-    I1 --> H1
-    I1 --> H2
-    I1 --> H3
-    I1 --> H4
-    I2 --> H1
-    I2 --> H2
-    I2 --> H3
-    I2 --> H4
+    x1 -- W1 --> h1
+    x1 -- W1 --> h2
+    x1 -- W1 --> h3
+    x1 -- W1 --> h4
+    x2 -- W1 --> h1
+    x2 -- W1 --> h2
+    x2 -- W1 --> h3
+    x2 -- W1 --> h4
 
-    H1 --> O
-    H2 --> O
-    H3 --> O
-    H4 --> O
+    h1 -- W2 --> y
+    h2 -- W2 --> y
+    h3 -- W2 --> y
+    h4 -- W2 --> y
 ```
 
 ### Network Details
