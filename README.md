@@ -1,6 +1,6 @@
 # Simple Neural Network from Scratch
 
-A minimal implementation of a neural network with one hidden layer, designed to solve the XOR problem using only NumPy.
+A minimal implementation of a neural network with 4 hidden layer, designed to solve the XOR problem using only NumPy.
 
 ## Architecture
 
