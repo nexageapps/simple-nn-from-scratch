@@ -4,42 +4,18 @@ A minimal implementation of a neural network with one hidden layer, designed to 
 
 ## Architecture
 
-The neural network has the following structure:
-
 ```mermaid
-graph LR
-    subgraph Input
-        x1((x1))
-        x2((x2))
-    end
+flowchart LR
+    x1([x1]) & x2([x2]) --> h1([h1]) & h2([h2]) & h3([h3]) & h4([h4]) --> y([y])
 
-    subgraph Hidden
-        h1((h1))
-        h2((h2))
-        h3((h3))
-        h4((h4))
-    end
-
-    subgraph Output
-        y((y))
-    end
-
-    x1 -->|W1| h1
-    x1 -->|W1| h2
-    x1 -->|W1| h3
-    x1 -->|W1| h4
-    x2 -->|W1| h1
-    x2 -->|W1| h2
-    x2 -->|W1| h3
-    x2 -->|W1| h4
-
-    h1 -->|W2| y
-    h2 -->|W2| y
-    h3 -->|W2| y
-    h4 -->|W2| y
+    style x1 fill:#4A90D9,stroke:#2c5f8a,color:#fff
+    style x2 fill:#4A90D9,stroke:#2c5f8a,color:#fff
+    style h1 fill:#E8A838,stroke:#a87020,color:#fff
+    style h2 fill:#E8A838,stroke:#a87020,color:#fff
+    style h3 fill:#E8A838,stroke:#a87020,color:#fff
+    style h4 fill:#E8A838,stroke:#a87020,color:#fff
+    style y  fill:#5BAD6F,stroke:#357a47,color:#fff
 ```
-
-### Network Details
 
 | Layer | Neurons | Activation |
 |-------|---------|------------|
@@ -47,24 +23,19 @@ graph LR
 | Hidden | 4 | Sigmoid |
 | Output | 1 | Sigmoid |
 
-- **Input Layer**: 2 neurons (for XOR inputs x1, x2)
-- **Hidden Layer**: 4 neurons with sigmoid activation
-- **Output Layer**: 1 neuron with sigmoid activation
-- **Loss Function**: Mean Squared Error (MSE)
-- **Optimization**: Gradient Descent
+- Loss Function: Mean Squared Error (MSE)
+- Optimization: Gradient Descent with backpropagation
 
 ## XOR Problem
 
-The XOR (exclusive OR) function is a classic binary classification problem:
+The XOR function is not linearly separable, requiring at least one hidden layer to solve.
 
-| Input 1 | Input 2 | Output |
-|---------|---------|--------|
-|   0     |   0     |   0    |
-|   0     |   1     |   1    |
-|   1     |   0     |   1    |
-|   1     |   1     |   0    |
-
-This problem is not linearly separable, which is why a neural network with at least one hidden layer is required.
+| x1 | x2 | y |
+|----|----|---|
+| 0  | 0  | 0 |
+| 0  | 1  | 1 |
+| 1  | 0  | 1 |
+| 1  | 1  | 0 |
 
 ## Files
 
@@ -75,41 +46,34 @@ This problem is not linearly separable, which is why a neural network with at le
 ## Usage
 
 ```bash
-python train.py
+python3 train.py
 ```
 
 ## Training Configuration
 
-Default settings in `train.py`:
-- Epochs: 10,000
-- Learning rate: 0.8
-- Hidden neurons: 4
+| Parameter | Value |
+|-----------|-------|
+| Epochs | 10,000 |
+| Learning rate | 0.8 |
+| Hidden neurons | 4 |
+| Seed | 42 |
 
 ## Mathematical Background
 
 ### Forward Pass
 
 ```
-z1 = X · W1 + b1
-a1 = sigmoid(z1)
-
-z2 = a1 · W2 + b2
-a2 = sigmoid(z2)
+z1 = X . W1 + b1       a1 = sigmoid(z1)
+z2 = a1 . W2 + b2      a2 = sigmoid(z2)
 ```
 
 ### Backward Pass
 
 ```
-dL/dz2 = (a2 - y) * sigmoid_derivative(z2)
-dW2 = a1^T · dL/dz2 / m
-db2 = sum(dL/dz2) / m
-
-dL/dz1 = (dL/dz2 · W2^T) * sigmoid_derivative(z1)
-dW1 = X^T · dL/dz1 / m
-db1 = sum(dL/dz1) / m
-
-W = W - lr * dW
-b = b - lr * db
+dL/dz2 = (a2 - y) * sigmoid'(z2)
+dW2    = a1^T . dL/dz2 / m
+dL/dz1 = (dL/dz2 . W2^T) * sigmoid'(z1)
+dW1    = X^T . dL/dz1 / m
 ```
 
 ## Requirements
