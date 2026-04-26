@@ -6,7 +6,35 @@ A minimal implementation of a neural network with one hidden layer, designed to 
 
 ```mermaid
 flowchart LR
-    x1([x1]) & x2([x2]) --> h1([h1]) & h2([h2]) & h3([h3]) & h4([h4]) --> y([y])
+    subgraph IL["Input Layer"]
+        x1(["x1"])
+        x2(["x2"])
+    end
+
+    subgraph HL["Hidden Layer  |  Sigmoid"]
+        h1(["h1"])
+        h2(["h2"])
+        h3(["h3"])
+        h4(["h4"])
+    end
+
+    subgraph OL["Output Layer  |  Sigmoid"]
+        y(["y"])
+    end
+
+    x1 -- "W1 + b1" --> h1
+    x1 -- "W1 + b1" --> h2
+    x1 -- "W1 + b1" --> h3
+    x1 -- "W1 + b1" --> h4
+    x2 -- "W1 + b1" --> h1
+    x2 -- "W1 + b1" --> h2
+    x2 -- "W1 + b1" --> h3
+    x2 -- "W1 + b1" --> h4
+
+    h1 -- "W2 + b2" --> y
+    h2 -- "W2 + b2" --> y
+    h3 -- "W2 + b2" --> y
+    h4 -- "W2 + b2" --> y
 
     style x1 fill:#4A90D9,stroke:#2c5f8a,color:#fff
     style x2 fill:#4A90D9,stroke:#2c5f8a,color:#fff
@@ -17,11 +45,11 @@ flowchart LR
     style y  fill:#5BAD6F,stroke:#357a47,color:#fff
 ```
 
-| Layer | Neurons | Activation |
-|-------|---------|------------|
-| Input | 2 | None |
-| Hidden | 4 | Sigmoid |
-| Output | 1 | Sigmoid |
+| Layer | Neurons | Weights | Bias | Activation |
+|-------|---------|---------|------|------------|
+| Input | 2 | - | - | None |
+| Hidden | 4 | W1 (2x4) | b1 | Sigmoid |
+| Output | 1 | W2 (4x1) | b2 | Sigmoid |
 
 - Loss Function: Mean Squared Error (MSE)
 - Optimization: Gradient Descent with backpropagation
