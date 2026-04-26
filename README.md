@@ -65,6 +65,35 @@ The XOR function is not linearly separable, requiring at least one hidden layer 
 | 1  | 0  | 1 |
 | 1  | 1  | 0 |
 
+## Practical Applications
+
+This architecture — a small fully connected network with sigmoid activations — is suited for low-dimensional binary classification tasks where inputs are structured and the dataset is small.
+
+| Use Case | Inputs | Output |
+|----------|--------|--------|
+| Spam detection | Word frequency features | Spam / Not spam |
+| Disease diagnosis | Patient vitals (e.g. age, blood pressure) | At risk / Not at risk |
+| Fault detection | Sensor readings from a machine | Fault / Normal |
+| Credit approval | Income, debt ratio | Approve / Reject |
+| Gate simulation | Logic signal pairs | Binary output (AND, OR, XOR, NAND) |
+| Student pass/fail prediction | Attendance, test scores | Pass / Fail |
+
+### Why this architecture fits these problems
+
+- The inputs are small in number (2 to ~10 features), matching the 2-input design
+- The output is binary (0 or 1), matching the single sigmoid output neuron
+- The hidden layer with sigmoid activation can learn non-linear decision boundaries, which is why it solves XOR where a single-layer network cannot
+- Gradient descent with MSE loss converges reliably on clean, small datasets
+
+### Limitations
+
+This network does not scale well to:
+
+- High-dimensional inputs (images, text) — needs CNNs or transformers
+- Multi-class problems — needs softmax output with more neurons
+- Large datasets — needs mini-batch training and optimizers like Adam
+- Deep representations — needs more hidden layers and ReLU activations
+
 ## Files
 
 - `nn.py` - Neural network implementation
