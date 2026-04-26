@@ -98,12 +98,21 @@ This network does not scale well to:
 
 - `nn.py` - Neural network implementation
 - `xor_dataset.py` - XOR dataset generation
-- `train.py` - Training script
+- `train.py` - Trains the model and returns it
+- `test.py` - Evaluates predictions and validates all XOR outputs
 
 ## Usage
 
+Train only:
+
 ```bash
 python3 train.py
+```
+
+Train, evaluate and validate:
+
+```bash
+python3 test.py
 ```
 
 ## Training Configuration
